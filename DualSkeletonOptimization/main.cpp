@@ -138,7 +138,7 @@ void dfs_check_union(int u, std::vector<std::vector<std::pair<int, int>>>& g, st
 
 bool check_union(std::vector<std::vector<std::pair<int, int>>>& g, int set1, int set2, std::vector<int>& lable) {
     std::vector<int>vis;
-    vis.resize(g.size(), 0); // 0:Î´·ÃÎÊ 1:ÔÚset1ÖÐ 2:ÔÚset2ÖÐ
+    vis.resize(g.size(), 0); // 0:Î´ï¿½ï¿½ï¿½ï¿½ 1:ï¿½ï¿½set1ï¿½ï¿½ 2:ï¿½ï¿½set2ï¿½ï¿½
     dfs_check_union(set1, g, lable, 1, vis);
     dfs_check_union(set2, g, lable, 2, vis);
     int num = 0;
@@ -204,7 +204,7 @@ void divide2Set(std::vector<std::tuple<float, float, float>>points, std::vector<
                 if (vis[i] == vis[to]) degree[i]++;
             }
         }
-        std::vector<int>can_exchange(graph.size()); // whether the point interchangeable£¨whether the degrees of this point and its neighbors greater than 2£©
+        std::vector<int>can_exchange(graph.size()); // whether the point interchangeableï¿½ï¿½whether the degrees of this point and its neighbors greater than 2ï¿½ï¿½
         for (int i = 1; i < graph.size(); i++) {
             can_exchange[i] = ((graph[i].size() - degree[i]) > 1); // Current point's degree must be greater than 2, and the degree transferred to the other party's set must also be greater than or equal to 2
             for (auto p : graph[i]) {
@@ -250,7 +250,7 @@ void divide2Set(std::vector<std::tuple<float, float, float>>points, std::vector<
             vis[from] = 3 - vis[from]; //recover from label
         }
         if (max_id == -1) {
-            std::cout << "max_id == -1£¡£¡ epoch: " << epoch << " max_id: " << max_id << " score: " << score << std::endl;
+            std::cout << "max_id == -1ï¿½ï¿½ï¿½ï¿½ epoch: " << epoch << " max_id: " << max_id << " score: " << score << std::endl;
             break;
         }
 
@@ -333,12 +333,12 @@ void flow_field(std::vector<std::tuple<float, float, float>>& points, std::vecto
             std::tuple<float, float, float> edge_dir = subtract_tuples(points[i - 1], points[to - 1]);
             float angle = angle_between_vectors(circle_dir, edge_dir);
             float pi = 3.1415926;
-            int val = 1;
+            int val1 = 1, val2 = 5;
             if (angle <= pi / 4 || angle >= pi / 4 * 3) {
-                p.second = val;
+                p.second = val1;
             }
             else {
-                p.second = val;
+                p.second = val2;
             }
         }
     }
@@ -517,7 +517,7 @@ int main(int argc, char** argv)
         if (w >= 1) graph[u].push_back({ v,w });
     }
 
-    // Éú³ÉÁ÷³¡Í¼
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
     std::vector<int>start;
     for (int i = 1; i < isBoundry.size(); i++) {
         if (isBoundry[i] == 0) continue;
@@ -528,7 +528,7 @@ int main(int argc, char** argv)
     flow_field(points, graph, start);
 	auto end1 = std::chrono::high_resolution_clock::now(); // calcate end time
 	std::chrono::duration<double> elapsed1 = end1 - start1; // calcate time difference (seconds)
-    std::cout << "The time of stage 1: " << elapsed1.count() << " Ãë" << std::endl;
+    std::cout << "The time of stage 1: " << elapsed1.count() << " ï¿½ï¿½" << std::endl;
 
 	// dual skeleton optimization
     std::vector<int> set1, set2;
@@ -547,7 +547,7 @@ int main(int argc, char** argv)
     std::cout << set1.size() << " " << set2.size() << " " << lable.size() << std::endl;
 	auto end2 = std::chrono::high_resolution_clock::now(); // calcate end time
 	std::chrono::duration<double> elapsed2 = end2 - end1; // calculate time difference (seconds)
-    std::cout << "The time of stage 2: " << elapsed2.count() << " Ãë" << std::endl;
+    std::cout << "The time of stage 2: " << elapsed2.count() << " ï¿½ï¿½" << std::endl;
 
 	// save points and graph
     std::cout << "save file" << std::endl;
